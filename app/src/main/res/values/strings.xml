@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ArcheageRegrade</string>
+    <string name="confirm_button">Ok</string>
+    <string name="success_chance">Шанс успеха</string>
+    <string name="degrade_chance">Шанс ухудшения</string>
+    <string name="destruct_chance">Шанс уничтожения</string>
 </resources>
