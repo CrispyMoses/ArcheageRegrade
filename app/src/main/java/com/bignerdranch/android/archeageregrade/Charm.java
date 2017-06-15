@@ -5,21 +5,21 @@ package com.bignerdranch.android.archeageregrade;
  */
 
 public class Charm {
-    private int mStringId;
+    private String mCharmName;
     private int mDrawableId;
-    private float mSuccesChance;
+    private float mMultiplyIndex;
 
-    public Charm(int stringId, int drawableId) {
-        mStringId = stringId;
+    public Charm(String name, int drawableId, float multiplyIndex) {
+        mCharmName = name;
         mDrawableId = drawableId;
     }
 
-    public int getStringId() {
-        return mStringId;
+    public String getCharmName() {
+        return mCharmName;
     }
 
-    public void setStringId(int stringId) {
-        mStringId = stringId;
+    public void setCharmName(String charmName) {
+        mCharmName = charmName;
     }
 
     public int getDrawableId() {
@@ -30,11 +30,11 @@ public class Charm {
         mDrawableId = drawableId;
     }
 
-    public float getSuccesChance() {
-        return mSuccesChance;
+    public float getMultiplyIndex() {
+        return mMultiplyIndex;
     }
 
-    public void setSuccesChance(float succesChance) {
-        mSuccesChance = succesChance;
+    public void setMultiplyIndex(float multiplyIndex) {
+        mMultiplyIndex = multiplyIndex;
     }
 }
