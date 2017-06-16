@@ -6,12 +6,13 @@ package com.bignerdranch.android.archeageregrade;
 
 public class Scroll {
     private boolean mTwin;
-    private String mScrollName;
-    private int DrawableId;
+    private int mScrollNameId;
+    private int mDrawableId;
 
-    public Scroll(String name,boolean twin) {
+    public Scroll(int nameId, boolean twin, int DrawableId) {
         mTwin = twin;
-        mScrollName = name;
+        mScrollNameId = nameId;
+        mDrawableId = DrawableId;
     }
 
     public boolean isTwin() {
@@ -22,19 +23,19 @@ public class Scroll {
         mTwin = twin;
     }
 
-    public String getScrollName() {
-        return mScrollName;
+    public int getScrollNameId() {
+        return mScrollNameId;
     }
 
-    public void setScrollName(String scrollName) {
-        mScrollName = scrollName;
+    public void setScrollNameId(int scrollNameId) {
+        mScrollNameId = scrollNameId;
     }
 
     public int getDrawableId() {
-        return DrawableId;
+        return mDrawableId;
     }
 
     public void setDrawableId(int drawableId) {
-        DrawableId = drawableId;
+        mDrawableId = drawableId;
     }
 }

@@ -4,4 +4,22 @@
     <string name="success_chance">Шанс успеха</string>
     <string name="degrade_chance">Шанс ухудшения</string>
     <string name="destruct_chance">Шанс уничтожения</string>
+    <string name="common">Обычный предмет</string>
+    <string name="green">Необычный предмет</string>
+    <string name="blue">Редкий предмет</string>
+    <string name="unique">Уникальный предмет</string>
+    <string name="epic">Эпический предмет</string>
+    <string name="legendary">Легендарный предмет</string>
+    <string name="relic">Реликвия</string>
+    <string name="epo1">Предмет эпохи чудес</string>
+    <string name="epo2">Предмет эпохи сказаний</string>
+    <string name="epo3">Предмет эпохи легенд</string>
+    <string name="epo4">Предмет эпохи мифов</string>
+    <string name="epo5">Предмет эпохи двенадцати</string>
+    <string name="scroll">Свиток чар</string>
+    <string name="twin_scroll">Свиток сильных чар</string>
+    <string name="main_charm">Основной катализатор</string>
+    <string name="upgraded_main_charm">Улучшенный основной катализатор</string>
+    <string name="weak_charm">Слабый катализатор</string>
+    <string name="weak_universal_charm">Слабый универсальный каталиатор</string>
 </resources>

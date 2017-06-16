@@ -8,24 +8,24 @@ public class Item {
 
     private boolean mDestructible;
     private boolean mDegradable;
-    private String mItemName;
+    private int mItemNameId;
     private int mDrawableId;
     private float mSuccessChance;
 
-    public Item(boolean destructible, boolean degradable, String itemName, int drawableId, float successChance) {
+    public Item(boolean destructible, boolean degradable, int itemNameId, int drawableId, float successChance) {
         mDestructible = destructible;
         mDegradable = degradable;
-        mItemName = itemName;
+        mItemNameId = itemNameId;
         mDrawableId = drawableId;
         mSuccessChance = successChance;
     }
 
-    public String getItemName() {
-        return mItemName;
+    public int getItemNameId() {
+        return mItemNameId;
     }
 
-    public void setItemName(String itemName) {
-        mItemName = itemName;
+    public void setItemNameId(int itemNameId) {
+        mItemNameId = itemNameId;
     }
 
     public int getDrawableId() {
