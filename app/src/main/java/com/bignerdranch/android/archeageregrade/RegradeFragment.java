@@ -48,17 +48,26 @@ public class RegradeFragment extends Fragment {
         mItemButton = (ImageButton) v.findViewById(R.id.item_button);
         mCharmButton = (ImageButton) v.findViewById(R.id.charm_button);
         mScrollButton = (ImageButton) v.findViewById(R.id.scroll_button);
-        mItemButton.setImageResource(mCurrentItem.getDrawableId());
-        mCharmButton.setImageResource(mCharm.getDrawableId());
-        mScrollButton.setImageResource(mScroll.getDrawableId());
+        updateUI();
 
         mTextChanceView = (TextView) v.findViewById(R.id.regrade_chance);
-        int chance = (int) (mCurrentItem.getSuccessChance() * mCharm.getMultiplyIndex());
+        final int chance = (int) (mCurrentItem.getSuccessChance() * mCharm.getMultiplyIndex());
         mTextChanceView.setText(( chance > 100 ? 100 : chance )+ "%");
-
 
         mOkButton = (Button) v.findViewById(R.id.ok_button);
 
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
+    }
+
+    private void updateUI() {
+        mItemButton.setImageResource(mCurrentItem.getDrawableId());
+        mCharmButton.setImageResource(mCharm.getDrawableId());
+        mScrollButton.setImageResource(mScroll.getDrawableId());
     }
 }

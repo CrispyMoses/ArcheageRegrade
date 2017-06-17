@@ -1,11 +1,11 @@
 package com.bignerdranch.android.archeageregrade;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 
-public class RegradeActivity extends FragmentActivity{
+public class RegradeActivity extends AppCompatActivity{
 
     protected Fragment createFragment() {
         return new RegradeFragment();
