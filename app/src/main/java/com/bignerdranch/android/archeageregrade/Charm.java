@@ -8,10 +8,17 @@ public class Charm {
     private int mCharmNameId;
     private int mDrawableId;
     private float mMultiplyIndex;
+    private int mMaxItemIndex;
 
-    public Charm(int nameId, int drawableId, float multiplyIndex) {
+    public Charm(int charmNameId, int drawableId, float multiplyIndex) {
+        this(charmNameId, drawableId, multiplyIndex, 0);
+    }
+
+    public Charm(int nameId, int drawableId, float multiplyIndex, int maxItemIndex) {
         mCharmNameId = nameId;
         mDrawableId = drawableId;
+        mMultiplyIndex = multiplyIndex;
+        mMaxItemIndex = maxItemIndex;
     }
 
     public int getCharmNameId() {

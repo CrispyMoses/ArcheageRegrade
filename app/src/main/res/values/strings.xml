@@ -22,4 +22,7 @@
     <string name="upgraded_main_charm">Улучшенный основной катализатор</string>
     <string name="weak_charm">Слабый катализатор</string>
     <string name="weak_universal_charm">Слабый универсальный каталиатор</string>
+    <string name="strong_charm">Мощный катализатор</string>
+    <string name="strong_universal_charm">Мощный универсальный катализатор</string>
+    <string name="twinkle_charm">Мерцающий катализатор</string>
 </resources>

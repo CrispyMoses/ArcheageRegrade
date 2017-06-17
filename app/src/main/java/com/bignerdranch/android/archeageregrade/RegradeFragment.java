@@ -1,5 +1,6 @@
 package com.bignerdranch.android.archeageregrade;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -38,6 +39,25 @@ public class RegradeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_regrade, container, false);
+
+        ItemsDataBase database = ItemsDataBase.getInstance();
+        mCurrentItem = database.getItemList().get(8);
+        mCharm = database.getCharmList().get(5);
+        mScroll = database.getScrollList().get(1);
+
+        mItemButton = (ImageButton) v.findViewById(R.id.item_button);
+        mCharmButton = (ImageButton) v.findViewById(R.id.charm_button);
+        mScrollButton = (ImageButton) v.findViewById(R.id.scroll_button);
+        mItemButton.setImageResource(mCurrentItem.getDrawableId());
+        mCharmButton.setImageResource(mCharm.getDrawableId());
+        mScrollButton.setImageResource(mScroll.getDrawableId());
+
+        mTextChanceView = (TextView) v.findViewById(R.id.regrade_chance);
+        int chance = (int) (mCurrentItem.getSuccessChance() * mCharm.getMultiplyIndex());
+        mTextChanceView.setText(( chance > 100 ? 100 : chance )+ "%");
+
+
+        mOkButton = (Button) v.findViewById(R.id.ok_button);
 
         return v;
     }
