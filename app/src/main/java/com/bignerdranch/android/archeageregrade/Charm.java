@@ -44,4 +44,6 @@ public class Charm implements Items {
     public void setMultiplyIndex(float multiplyIndex) {
         mMultiplyIndex = multiplyIndex;
     }
+
+
 }
