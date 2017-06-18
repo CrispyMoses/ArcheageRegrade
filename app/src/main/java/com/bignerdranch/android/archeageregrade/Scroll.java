@@ -4,7 +4,7 @@ package com.bignerdranch.android.archeageregrade;
  * Created by Crispy on 14.06.2017.
  */
 
-public class Scroll {
+public class Scroll implements Items {
     private boolean mTwin;
     private int mScrollNameId;
     private int mDrawableId;
@@ -23,11 +23,11 @@ public class Scroll {
         mTwin = twin;
     }
 
-    public int getScrollNameId() {
+    public int getNameId() {
         return mScrollNameId;
     }
 
-    public void setScrollNameId(int scrollNameId) {
+    public void setNameId(int scrollNameId) {
         mScrollNameId = scrollNameId;
     }
 

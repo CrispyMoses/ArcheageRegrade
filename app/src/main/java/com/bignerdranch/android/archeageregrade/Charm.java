@@ -4,7 +4,7 @@ package com.bignerdranch.android.archeageregrade;
  * Created by Crispy on 14.06.2017.
  */
 
-public class Charm {
+public class Charm implements Items {
     private int mCharmNameId;
     private int mDrawableId;
     private float mMultiplyIndex;
@@ -21,11 +21,11 @@ public class Charm {
         mMaxItemIndex = maxItemIndex;
     }
 
-    public int getCharmNameId() {
+    public int getNameId() {
         return mCharmNameId;
     }
 
-    public void setCharmNameId(int charmNameId) {
+    public void setNameId(int charmNameId) {
         mCharmNameId = charmNameId;
     }
 

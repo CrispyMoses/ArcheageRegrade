@@ -4,7 +4,7 @@ package com.bignerdranch.android.archeageregrade;
  * Created by Crispy on 14.06.2017.
  */
 
-public class Item {
+public class Item implements Items {
 
     private boolean mDestructible;
     private boolean mDegradable;
@@ -20,11 +20,11 @@ public class Item {
         mSuccessChance = successChance;
     }
 
-    public int getItemNameId() {
+    public int getNameId() {
         return mItemNameId;
     }
 
-    public void setItemNameId(int itemNameId) {
+    public void setNameId(int itemNameId) {
         mItemNameId = itemNameId;
     }
 

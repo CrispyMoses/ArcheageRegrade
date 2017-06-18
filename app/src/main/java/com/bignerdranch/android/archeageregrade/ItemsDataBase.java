@@ -10,9 +10,9 @@ import java.util.List;
 public class ItemsDataBase {
     private static final ItemsDataBase ourInstance = new ItemsDataBase();
 
-    private List<Item> mItemList;
-    private List<Charm> mCharmList;
-    private List<Scroll> mScrollList;
+    private List<Items> mItemList;
+    private List<Items> mCharmList;
+    private List<Items> mScrollList;
 
     public static ItemsDataBase getInstance() {
         return ourInstance;
@@ -43,20 +43,20 @@ public class ItemsDataBase {
         mCharmList.add(new Charm(R.string.weak_charm, R.drawable.weak_charm, 1.5f, 5));
         mCharmList.add(new Charm(R.string.weak_universal_charm, R.drawable.weak_universal_charm, 1.5f));
         mCharmList.add(new Charm(R.string.strong_charm, R.drawable.strong_charm, 2, 5));
-        mCharmList.add(new Charm(R.string.akhium_talisman, R.drawable.akhium_talisman, 1, 5));
         mCharmList.add(new Charm(R.string.strong_universal_charm, R.drawable.strong_universal_charm, 2));
+        mCharmList.add(new Charm(R.string.akhium_talisman, R.drawable.akhium_talisman, 1, 5));
         mCharmList.add(new Charm(R.string.twinkle_charm, R.drawable.twinkle_charm, 2.5f));
     }
 
-    public List<Item> getItemList() {
+    public List<Items> getItemList() {
         return mItemList;
     }
 
-    public List<Charm> getCharmList() {
+    public List<Items> getCharmList() {
         return mCharmList;
     }
 
-    public List<Scroll> getScrollList() {
+    public List<Items> getScrollList() {
         return mScrollList;
     }
 }

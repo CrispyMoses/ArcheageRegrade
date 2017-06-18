@@ -1,9 +1,9 @@
 package com.bignerdranch.android.archeageregrade;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +12,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
 
 /**
  * Created by Crispy on 14.06.2017.
@@ -35,20 +34,41 @@ public class RegradeFragment extends Fragment {
 
     private Button mOkButton;
 
+    private static final String DIALOG_ITEM = "DialogItem";
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_regrade, container, false);
 
         ItemsDataBase database = ItemsDataBase.getInstance();
-        mCurrentItem = database.getItemList().get(8);
-        mCharm = database.getCharmList().get(5);
-        mScroll = database.getScrollList().get(1);
+        mCurrentItem = (Item) database.getItemList().get(8);
+        mCharm = (Charm) database.getCharmList().get(5);
+        mScroll = (Scroll) database.getScrollList().get(1);
 
         mItemButton = (ImageButton) v.findViewById(R.id.item_button);
         mCharmButton = (ImageButton) v.findViewById(R.id.charm_button);
         mScrollButton = (ImageButton) v.findViewById(R.id.scroll_button);
         updateUI();
+
+        mItemButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onclickSetter();
+            }
+        });
+        mScrollButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onclickSetter();
+            }
+        });
+        mCharmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onclickSetter();
+            }
+        });
 
         mTextChanceView = (TextView) v.findViewById(R.id.regrade_chance);
         final int chance = (int) (mCurrentItem.getSuccessChance() * mCharm.getMultiplyIndex());
@@ -69,5 +89,11 @@ public class RegradeFragment extends Fragment {
         mItemButton.setImageResource(mCurrentItem.getDrawableId());
         mCharmButton.setImageResource(mCharm.getDrawableId());
         mScrollButton.setImageResource(mScroll.getDrawableId());
+    }
+
+    private void onclickSetter() {
+        FragmentManager fm = getFragmentManager();
+        ItemPickerFragment dialog = new ItemPickerFragment();
+        dialog.show(fm, DIALOG_ITEM);
     }
 }
