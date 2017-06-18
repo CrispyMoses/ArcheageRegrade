@@ -3,6 +3,7 @@ package com.bignerdranch.android.archeageregrade;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +26,8 @@ import java.util.List;
 public class ItemPickerFragment extends DialogFragment {
 
     private List<Items> mItemsList;
+    private int mCode;
+    private static final String DIALOG_ITEM = "DialogItem";
 
     @NonNull
     @Override
@@ -31,15 +35,32 @@ public class ItemPickerFragment extends DialogFragment {
 
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.choose_dialog, null);
 
-        mItemsList = ItemsDataBase.getInstance().getItemList();
+        mCode = getArguments().getInt(DIALOG_ITEM);
+        if (mCode == 1) mItemsList = ItemsDataBase.getInstance().getItemList();
+        else if (mCode == 2) mItemsList = ItemsDataBase.getInstance().getScrollList();
+        else if (mCode == 3) mItemsList = ItemsDataBase.getInstance().getCharmList();
+
 
 
         return new AlertDialog.Builder(getActivity())
                 .setView(v)
-                .setAdapter(new ItemAdapter(getActivity()), null)
+                .setAdapter(new ItemAdapter(getActivity()), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
                 .setTitle(R.string.choose_item)
                 .create();
 
+    }
+
+    public static ItemPickerFragment newInstance(int code) {
+        Bundle bundle = new Bundle();
+        bundle.putInt(DIALOG_ITEM, code);
+        ItemPickerFragment dialog =  new ItemPickerFragment();
+        dialog.setArguments(bundle);
+        return dialog;
     }
 
     private class ItemAdapter extends ArrayAdapter<Items> {

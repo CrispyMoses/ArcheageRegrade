@@ -54,19 +54,19 @@ public class RegradeFragment extends Fragment {
         mItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onclickSetter();
+                onclickSetter(1);
             }
         });
         mScrollButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onclickSetter();
+                onclickSetter(2);
             }
         });
         mCharmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onclickSetter();
+                onclickSetter(3);
             }
         });
 
@@ -86,14 +86,15 @@ public class RegradeFragment extends Fragment {
     }
 
     private void updateUI() {
+
         mItemButton.setImageResource(mCurrentItem.getDrawableId());
         mCharmButton.setImageResource(mCharm.getDrawableId());
         mScrollButton.setImageResource(mScroll.getDrawableId());
     }
 
-    private void onclickSetter() {
+    private void onclickSetter(int code) {
         FragmentManager fm = getFragmentManager();
-        ItemPickerFragment dialog = new ItemPickerFragment();
+        ItemPickerFragment dialog = ItemPickerFragment.newInstance(code);
         dialog.show(fm, DIALOG_ITEM);
     }
 }
