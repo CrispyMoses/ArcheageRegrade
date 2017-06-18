@@ -35,6 +35,9 @@ public class RegradeFragment extends Fragment {
     private Button mOkButton;
 
     private static final String DIALOG_ITEM = "DialogItem";
+    public static final int ITEM_DIALOG_LIST_CODE = 1;
+    public static final int SCROLL_DIALOG_LIST_CODE = 2;
+    public static final int CHARM_DIALOG_LIST_CODE = 3;
 
     @Nullable
     @Override
@@ -54,19 +57,19 @@ public class RegradeFragment extends Fragment {
         mItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onclickSetter(1);
+                onclickSetter(ITEM_DIALOG_LIST_CODE);
             }
         });
         mScrollButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onclickSetter(2);
+                onclickSetter(SCROLL_DIALOG_LIST_CODE);
             }
         });
         mCharmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onclickSetter(3);
+                onclickSetter(CHARM_DIALOG_LIST_CODE);
             }
         });
 

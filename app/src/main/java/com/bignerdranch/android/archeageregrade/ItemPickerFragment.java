@@ -36,9 +36,12 @@ public class ItemPickerFragment extends DialogFragment {
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.choose_dialog, null);
 
         mCode = getArguments().getInt(DIALOG_ITEM);
-        if (mCode == 1) mItemsList = ItemsDataBase.getInstance().getItemList();
-        else if (mCode == 2) mItemsList = ItemsDataBase.getInstance().getScrollList();
-        else if (mCode == 3) mItemsList = ItemsDataBase.getInstance().getCharmList();
+        if (mCode == RegradeFragment.ITEM_DIALOG_LIST_CODE)
+            mItemsList = ItemsDataBase.getInstance().getItemList();
+        else if (mCode == RegradeFragment.SCROLL_DIALOG_LIST_CODE)
+            mItemsList = ItemsDataBase.getInstance().getScrollList();
+        else if (mCode == RegradeFragment.CHARM_DIALOG_LIST_CODE)
+            mItemsList = ItemsDataBase.getInstance().getCharmList();
 
 
 
