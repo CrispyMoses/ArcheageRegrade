@@ -25,8 +25,8 @@ public class ItemsDataBase {
         mItemList.add(new Item(false, false, R.string.blue, R.drawable.blue, 50));
         mItemList.add(new Item(false, false, R.string.unique, R.drawable.unique, 50));
         mItemList.add(new Item(false, false, R.string.epic, R.drawable.epic, 35));
-        mItemList.add(new Item(false, false, R.string.legendary, R.drawable.legendary, 30));
-        mItemList.add(new Item(true, true, R.string.relic, R.drawable.relic, 10));
+        mItemList.add(new Item(false, false, R.string.legendary, R.drawable.legendary, 35));
+        mItemList.add(new Item(true, true, R.string.relic, R.drawable.relic, 19.5f));
         mItemList.add(new Item(true, false, R.string.epo1, R.drawable.epo1, 8));
         mItemList.add(new Item(true, false, R.string.epo2, R.drawable.epo2, 3));
         mItemList.add(new Item(true, false, R.string.epo3, R.drawable.epo3, 2));

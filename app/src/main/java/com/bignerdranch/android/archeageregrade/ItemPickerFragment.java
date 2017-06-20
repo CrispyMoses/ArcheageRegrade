@@ -1,9 +1,11 @@
 package com.bignerdranch.android.archeageregrade;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,6 +31,10 @@ public class ItemPickerFragment extends DialogFragment {
     private List<Items> mItemsList;
     private int mCode;
     private static final String DIALOG_ITEM = "DialogItem";
+    public static final String EXTRA_ITEM = "ArcheageRegrade.item";
+    public static final String POSITION_OF_ITEM = "ItemPosition";
+    public static final String REQUEST_CODE = "RequestCode";
+
 
     @NonNull
     @Override
@@ -50,7 +57,7 @@ public class ItemPickerFragment extends DialogFragment {
                 .setAdapter(new ItemAdapter(getActivity()), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        sendResult(Activity.RESULT_OK, which);
                     }
                 })
                 .setTitle(R.string.choose_item)
@@ -87,6 +94,18 @@ public class ItemPickerFragment extends DialogFragment {
                     .setImageResource(item.getDrawableId());
             return convertView;
         }
+    }
+
+    private void sendResult(int resultCode, int item) {
+        if (getTargetFragment() == null) {
+            return;
+        }
+        Intent intent = new Intent();
+        Bundle bundle = new Bundle();
+        bundle.putInt(POSITION_OF_ITEM, item);
+        bundle.putInt(REQUEST_CODE, mCode);
+        intent.putExtra(EXTRA_ITEM, bundle);
+        getTargetFragment().onActivityResult(getTargetRequestCode(), resultCode, intent);
     }
 
 }

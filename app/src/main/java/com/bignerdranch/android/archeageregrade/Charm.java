@@ -1,5 +1,7 @@
 package com.bignerdranch.android.archeageregrade;
 
+import android.os.Parcelable;
+
 /**
  * Created by Crispy on 14.06.2017.
  */

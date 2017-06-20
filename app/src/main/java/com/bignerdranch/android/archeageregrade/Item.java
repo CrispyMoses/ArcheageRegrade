@@ -1,10 +1,12 @@
 package com.bignerdranch.android.archeageregrade;
 
+import java.io.Serializable;
+
 /**
  * Created by Crispy on 14.06.2017.
  */
 
-public class Item implements Items {
+public class Item implements Items{
 
     private boolean mDestructible;
     private boolean mDegradable;
