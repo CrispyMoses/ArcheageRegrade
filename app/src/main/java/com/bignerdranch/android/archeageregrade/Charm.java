@@ -13,7 +13,7 @@ public class Charm implements Items {
     private int mMaxItemIndex;
 
     public Charm(int charmNameId, int drawableId, float multiplyIndex) {
-        this(charmNameId, drawableId, multiplyIndex, 0);
+        this(charmNameId, drawableId, multiplyIndex, 10);
     }
 
     public Charm(int nameId, int drawableId, float multiplyIndex, int maxItemIndex) {
@@ -47,5 +47,11 @@ public class Charm implements Items {
         mMultiplyIndex = multiplyIndex;
     }
 
+    public int getMaxItemIndex() {
+        return mMaxItemIndex;
+    }
 
+    public void setMaxItemIndex(int maxItemIndex) {
+        mMaxItemIndex = maxItemIndex;
+    }
 }

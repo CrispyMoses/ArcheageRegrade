@@ -30,7 +30,9 @@ public class ItemPickerFragment extends DialogFragment {
 
     private List<Items> mItemsList;
     private int mCode;
+    private int mItemPosition;
     private static final String DIALOG_ITEM = "DialogItem";
+    private static final String ITEM_POSITION = "ItemPosition";
     public static final String EXTRA_ITEM = "ArcheageRegrade.item";
     public static final String POSITION_OF_ITEM = "ItemPosition";
     public static final String REQUEST_CODE = "RequestCode";
@@ -43,12 +45,19 @@ public class ItemPickerFragment extends DialogFragment {
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.choose_dialog, null);
 
         mCode = getArguments().getInt(DIALOG_ITEM);
-        if (mCode == RegradeFragment.ITEM_DIALOG_LIST_CODE)
+        mItemPosition = getArguments().getInt(ITEM_POSITION);
+        if (mCode == RegradeFragment.ITEM_DIALOG_LIST_CODE) {
             mItemsList = ItemsDataBase.getInstance().getItemList();
+        }
         else if (mCode == RegradeFragment.SCROLL_DIALOG_LIST_CODE)
             mItemsList = ItemsDataBase.getInstance().getScrollList();
-        else if (mCode == RegradeFragment.CHARM_DIALOG_LIST_CODE)
-            mItemsList = ItemsDataBase.getInstance().getCharmList();
+        else if (mCode == RegradeFragment.CHARM_DIALOG_LIST_CODE) {
+            List<Items> charmList = ItemsDataBase.getInstance().getCharmList();
+            mItemsList = new ArrayList<>();
+            for (Items item : charmList) {
+                if (((Charm) item).getMaxItemIndex() >= mItemPosition) mItemsList.add(item);
+            }
+        }
 
 
 
@@ -57,7 +66,11 @@ public class ItemPickerFragment extends DialogFragment {
                 .setAdapter(new ItemAdapter(getActivity()), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        sendResult(Activity.RESULT_OK, which);
+                        if (mCode == RegradeFragment.CHARM_DIALOG_LIST_CODE)
+                            sendResult(Activity.RESULT_OK, ItemsDataBase.getInstance()
+                                    .getCharmList()
+                                    .indexOf(mItemsList.get(which)));
+                        else sendResult(Activity.RESULT_OK, which);
                     }
                 })
                 .setTitle(R.string.choose_item)
@@ -65,9 +78,10 @@ public class ItemPickerFragment extends DialogFragment {
 
     }
 
-    public static ItemPickerFragment newInstance(int code) {
+    public static ItemPickerFragment newInstance(int code, int itemPosition) {
         Bundle bundle = new Bundle();
         bundle.putInt(DIALOG_ITEM, code);
+        bundle.putInt(ITEM_POSITION, itemPosition);
         ItemPickerFragment dialog =  new ItemPickerFragment();
         dialog.setArguments(bundle);
         return dialog;

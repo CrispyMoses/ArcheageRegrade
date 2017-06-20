@@ -99,7 +99,7 @@ public class RegradeFragment extends Fragment {
 
     private void onclickSetter(int code) {
         FragmentManager fm = getFragmentManager();
-        ItemPickerFragment dialog = ItemPickerFragment.newInstance(code);
+        ItemPickerFragment dialog = ItemPickerFragment.newInstance(code, ItemsDataBase.getInstance().getItemList().indexOf(mCurrentItem));
         dialog.setTargetFragment(RegradeFragment.this, REQUEST_ITEM);
         dialog.show(fm, DIALOG_ITEM);
     }
