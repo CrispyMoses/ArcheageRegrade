@@ -22,15 +22,15 @@ public class ItemsDataBase {
         mItemList = new ArrayList<>();
         mItemList.add(new Item(false, false, R.string.common, R.drawable.common, 100));
         mItemList.add(new Item(false, false, R.string.green, R.drawable.green, 100));
-        mItemList.add(new Item(false, false, R.string.blue, R.drawable.blue, 50));
-        mItemList.add(new Item(false, false, R.string.unique, R.drawable.unique, 50));
-        mItemList.add(new Item(false, false, R.string.epic, R.drawable.epic, 35));
-        mItemList.add(new Item(false, false, R.string.legendary, R.drawable.legendary, 35));
+        mItemList.add(new Item(false, false, R.string.blue, R.drawable.blue, 100));
+        mItemList.add(new Item(false, false, R.string.unique, R.drawable.unique, 32.5f));
+        mItemList.add(new Item(false, false, R.string.epic, R.drawable.epic, 32.5f));
+        mItemList.add(new Item(false, false, R.string.legendary, R.drawable.legendary, 22.8f));
         mItemList.add(new Item(true, true, R.string.relic, R.drawable.relic, 19.5f));
-        mItemList.add(new Item(true, false, R.string.epo1, R.drawable.epo1, 8));
-        mItemList.add(new Item(true, false, R.string.epo2, R.drawable.epo2, 3));
+        mItemList.add(new Item(true, false, R.string.epo1, R.drawable.epo1, 6.5f));
+        mItemList.add(new Item(true, false, R.string.epo2, R.drawable.epo2, 5.2f));
         mItemList.add(new Item(true, false, R.string.epo3, R.drawable.epo3, 2));
-        mItemList.add(new Item(true, false, R.string.epo4, R.drawable.epo4, 1));
+        mItemList.add(new Item(true, false, R.string.epo4, R.drawable.epo4, 1.3f));
         mItemList.add(new Item(true, false, R.string.epo5, R.drawable.epo5, 100));
 
         mScrollList = new ArrayList<>();

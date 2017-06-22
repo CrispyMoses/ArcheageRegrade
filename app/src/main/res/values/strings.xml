@@ -4,6 +4,11 @@
     <string name="success_chance">Шанс успеха</string>
     <string name="degrade_chance">Шанс ухудшения</string>
     <string name="destruct_chance">Шанс уничтожения</string>
+    <string name="result_success">Успех!</string>
+    <string name="result_fail">Неудача</string>
+    <string name="result_unbelievable_success">Невероятная удача!</string>
+    <string name="result_destruct">Снаряжение разрушилось</string>
+    <string name="result_degrade">Снаряжение ухудшилось</string>
     <string name="common">Обычный предмет</string>
     <string name="green">Необычный предмет</string>
     <string name="blue">Редкий предмет</string>

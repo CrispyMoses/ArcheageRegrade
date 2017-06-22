@@ -13,6 +13,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.List;
+import java.util.Random;
 
 
 /**
@@ -38,6 +42,7 @@ public class RegradeFragment extends Fragment {
     private Button mOkButton;
 
     private static final String DIALOG_ITEM = "DialogItem";
+    private static final String DIALOG_RESULT = "DialogResult";
     public static final int ITEM_DIALOG_LIST_CODE = 1;
     public static final int SCROLL_DIALOG_LIST_CODE = 2;
     public static final int CHARM_DIALOG_LIST_CODE = 3;
@@ -45,11 +50,11 @@ public class RegradeFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_regrade, container, false);
 
         ItemsDataBase database = ItemsDataBase.getInstance();
-        mCurrentItem = (Item) database.getItemList().get(8);
+        mCurrentItem = (Item) database.getItemList().get(6);
         mCharm = (Charm) database.getCharmList().get(5);
         mScroll = (Scroll) database.getScrollList().get(1);
 
@@ -57,6 +62,8 @@ public class RegradeFragment extends Fragment {
         mCharmButton = (ImageButton) v.findViewById(R.id.charm_button);
         mScrollButton = (ImageButton) v.findViewById(R.id.scroll_button);
         mTextChanceView = (TextView) v.findViewById(R.id.regrade_chance);
+        mDestructible = (ImageView) v.findViewById(R.id.destruct_chance_image);
+        mDegradable = (ImageView) v.findViewById(R.id.degrade_chance_image);
         updateUI();
 
         mItemButton.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +86,57 @@ public class RegradeFragment extends Fragment {
         });
 
         mOkButton = (Button) v.findViewById(R.id.ok_button);
+        mOkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<Items> itemList = ItemsDataBase.getInstance().getItemList();
+                RegradeResultFragment dialog = null;
+                int currentIndex = itemList.indexOf(mCurrentItem);
+                if (Math.random()*100 < mSuccessChance) { //success
+                    if (Math.random()*100 < 10 && mScroll.isTwin()) { //double
+                        mPrevItem = mCurrentItem;
+                        mCurrentItem = (Item) itemList.get(currentIndex + 2);
+                        dialog = RegradeResultFragment.newInstance(currentIndex,
+                                itemList.indexOf(mCurrentItem),
+                                R.string.result_unbelievable_success,
+                                false, false, false, true);
+                    } else {
+                        mPrevItem = mCurrentItem;
+                        mCurrentItem = (Item) itemList.get(currentIndex + 1);
+                        dialog = RegradeResultFragment.newInstance(currentIndex,
+                                itemList.indexOf(mCurrentItem),
+                                R.string.result_success,
+                                true, false, false, false);
+                    }
+                }
+                else { //fail
+                    if (mCurrentItem.isDegradable() && Math.random()*100 <= 50) { //degrade
+                        mPrevItem = mCurrentItem;
+                        mCurrentItem = (Item) itemList.get(currentIndex - 3);
+                        dialog = RegradeResultFragment.newInstance(currentIndex,
+                                itemList.indexOf(mCurrentItem),
+                                R.string.result_degrade,
+                                false, true, false, false);
+                    }
+                    else if (mCurrentItem.isDestructible() ) { //destruct
+                        mPrevItem = mCurrentItem;
+                        mCurrentItem = null;
+                        dialog = RegradeResultFragment.newInstance(currentIndex,
+                                0,
+                                R.string.result_destruct,
+                                false, false, true, false);
+                    } else {
+                        dialog = RegradeResultFragment.newInstance(currentIndex,
+                                itemList.indexOf(mCurrentItem),
+                                R.string.result_fail,
+                                false, false, false, false);
+                    }
+                }
+
+                dialog.show(getFragmentManager(),DIALOG_RESULT);
+                updateUI();
+            }
+        });
 
         return v;
     }
@@ -90,11 +148,31 @@ public class RegradeFragment extends Fragment {
     }
 
     private void updateUI() {
-        mItemButton.setImageResource(mCurrentItem.getDrawableId());
-        mCharmButton.setImageResource(mCharm.getDrawableId());
+        if (mCurrentItem != null)  {
+            mItemButton.setImageResource(mCurrentItem.getDrawableId());
+            if (mCurrentItem.isDegradable()) mDegradable.setImageResource(R.drawable.true_image);
+            else mDegradable.setImageResource(R.drawable.false_image);
+            if (mCurrentItem.isDestructible()) mDestructible.setImageResource(R.drawable.true_image);
+            else mDestructible.setImageResource(R.drawable.false_image);
+        }
+        else {
+            mItemButton.setImageDrawable(null);
+            mDestructible.setImageDrawable(null);
+            mDegradable.setImageDrawable(null);
+        }
+        if (mCharm.getMaxItemIndex() >= ItemsDataBase.getInstance().getItemList().indexOf(mCurrentItem) || mCurrentItem == null)
+            mCharmButton.setImageResource(mCharm.getDrawableId());
+        else mCharmButton.setImageDrawable(null);
         mScrollButton.setImageResource(mScroll.getDrawableId());
-        mSuccessChance = (int) (mCurrentItem.getSuccessChance() * mCharm.getMultiplyIndex());
-        mTextChanceView.setText(( mSuccessChance > 100 ? 100 : mSuccessChance )+ "%");
+        if (mCurrentItem != null) {
+            mSuccessChance = (int) (mCurrentItem.getSuccessChance() * mCharm.getMultiplyIndex());
+            mSuccessChance = mSuccessChance > 100 ? 100 : mSuccessChance;
+            mTextChanceView.setText(mSuccessChance + "%");
+        }
+        else {
+            mSuccessChance = 0;
+            mTextChanceView.setText(null);
+        }
     }
 
     private void onclickSetter(int code) {
