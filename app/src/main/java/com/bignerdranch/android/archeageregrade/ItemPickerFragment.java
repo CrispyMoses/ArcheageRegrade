@@ -47,7 +47,8 @@ public class ItemPickerFragment extends DialogFragment {
         mCode = getArguments().getInt(DIALOG_ITEM);
         mItemPosition = getArguments().getInt(ITEM_POSITION);
         if (mCode == RegradeFragment.ITEM_DIALOG_LIST_CODE) {
-            mItemsList = ItemsDataBase.getInstance().getItemList();
+            mItemsList = ItemsDataBase.getInstance().getItemList()
+                    .subList(0, ItemsDataBase.getInstance().getItemList().size() - 1);
         }
         else if (mCode == RegradeFragment.SCROLL_DIALOG_LIST_CODE)
             mItemsList = ItemsDataBase.getInstance().getScrollList();

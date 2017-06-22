@@ -64,6 +64,7 @@ public class RegradeFragment extends Fragment {
         mTextChanceView = (TextView) v.findViewById(R.id.regrade_chance);
         mDestructible = (ImageView) v.findViewById(R.id.destruct_chance_image);
         mDegradable = (ImageView) v.findViewById(R.id.degrade_chance_image);
+        mOkButton = (Button) v.findViewById(R.id.ok_button);
         updateUI();
 
         mItemButton.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +86,6 @@ public class RegradeFragment extends Fragment {
             }
         });
 
-        mOkButton = (Button) v.findViewById(R.id.ok_button);
         mOkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,10 +168,12 @@ public class RegradeFragment extends Fragment {
             mSuccessChance = (int) (mCurrentItem.getSuccessChance() * mCharm.getMultiplyIndex());
             mSuccessChance = mSuccessChance > 100 ? 100 : mSuccessChance;
             mTextChanceView.setText(mSuccessChance + "%");
+            mOkButton.setEnabled(true);
         }
         else {
             mSuccessChance = 0;
             mTextChanceView.setText(null);
+            mOkButton.setEnabled(false);
         }
     }
 
