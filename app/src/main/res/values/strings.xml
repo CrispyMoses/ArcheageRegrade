@@ -31,5 +31,6 @@
     <string name="strong_universal_charm">Мощный универсальный катализатор</string>
     <string name="twinkle_charm">Мерцающий катализатор</string>
     <string name="akhium_talisman">Талисман из истинного акхиума</string>
+    <string name="none_charm">Без катализатора</string>
     <string name="choose_item">Выберете предмет</string>
 </resources>

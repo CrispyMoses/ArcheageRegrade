@@ -56,7 +56,7 @@ public class ItemPickerFragment extends DialogFragment {
             List<Items> charmList = ItemsDataBase.getInstance().getCharmList();
             mItemsList = new ArrayList<>();
             for (Items item : charmList) {
-                if (((Charm) item).getMaxItemIndex() >= mItemPosition) mItemsList.add(item);
+                if (((Charm) item).getMaxItemIndex() >= mItemPosition && ((Charm) item).getMinItemIndex() <= mItemPosition) mItemsList.add(item);
             }
         }
 
@@ -105,8 +105,10 @@ public class ItemPickerFragment extends DialogFragment {
             }
             ((TextView) convertView.findViewById(R.id.item_text_view))
                     .setText(item.getNameId());
+            if (item.getDrawableId() != 0)
             ((ImageView) convertView.findViewById(R.id.item_image_view))
                     .setImageResource(item.getDrawableId());
+            else ((ImageView) convertView.findViewById(R.id.item_image_view)).setImageDrawable(null);
             return convertView;
         }
     }

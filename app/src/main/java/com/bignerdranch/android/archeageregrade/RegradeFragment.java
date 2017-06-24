@@ -93,7 +93,7 @@ public class RegradeFragment extends Fragment {
                 RegradeResultFragment dialog = null;
                 int currentIndex = itemList.indexOf(mCurrentItem);
                 if (Math.random()*100 < mSuccessChance) { //success
-                    if (Math.random()*100 < 10 && mScroll.isTwin()) { //double
+                    if (Math.random()*100 < 10 && mScroll.isTwin() && (itemList.indexOf(mCurrentItem) < itemList.size() - 2)) { //double
                         mPrevItem = mCurrentItem;
                         mCurrentItem = (Item) itemList.get(currentIndex + 2);
                         dialog = RegradeResultFragment.newInstance(currentIndex,
@@ -110,7 +110,7 @@ public class RegradeFragment extends Fragment {
                     }
                 }
                 else { //fail
-                    if (mCurrentItem.isDegradable() && Math.random()*100 <= 50) { //degrade
+                    if (mCurrentItem.isDegradable() && Math.random()*100 <= 50 && !mCharm.isBlockDegradeDestruct()) { //degrade
                         mPrevItem = mCurrentItem;
                         mCurrentItem = (Item) itemList.get(currentIndex - 3);
                         dialog = RegradeResultFragment.newInstance(currentIndex,
@@ -118,7 +118,7 @@ public class RegradeFragment extends Fragment {
                                 R.string.result_degrade,
                                 false, true, false, false);
                     }
-                    else if (mCurrentItem.isDestructible() ) { //destruct
+                    else if (mCurrentItem.isDestructible() && !mCharm.isBlockDegradeDestruct()) { //destruct
                         mPrevItem = mCurrentItem;
                         mCurrentItem = null;
                         dialog = RegradeResultFragment.newInstance(currentIndex,
@@ -148,11 +148,19 @@ public class RegradeFragment extends Fragment {
     }
 
     private void updateUI() {
+        if (mCharm.getMaxItemIndex() >= ItemsDataBase.getInstance().getItemList().indexOf(mCurrentItem) &&
+                mCharm.getMinItemIndex() <= ItemsDataBase.getInstance().getItemList().indexOf(mCurrentItem) ||
+                mCurrentItem == null)
+            mCharmButton.setImageResource(mCharm.getDrawableId());
+        else {
+            mCharm = (Charm) ItemsDataBase.getInstance().getCharmList().get(0);
+            mCharmButton.setImageDrawable(null);
+        }
         if (mCurrentItem != null)  {
             mItemButton.setImageResource(mCurrentItem.getDrawableId());
-            if (mCurrentItem.isDegradable()) mDegradable.setImageResource(R.drawable.true_image);
+            if (mCurrentItem.isDegradable() && !mCharm.isBlockDegradeDestruct()) mDegradable.setImageResource(R.drawable.true_image);
             else mDegradable.setImageResource(R.drawable.false_image);
-            if (mCurrentItem.isDestructible()) mDestructible.setImageResource(R.drawable.true_image);
+            if (mCurrentItem.isDestructible() && !mCharm.isBlockDegradeDestruct()) mDestructible.setImageResource(R.drawable.true_image);
             else mDestructible.setImageResource(R.drawable.false_image);
         }
         else {
@@ -160,12 +168,11 @@ public class RegradeFragment extends Fragment {
             mDestructible.setImageDrawable(null);
             mDegradable.setImageDrawable(null);
         }
-        if (mCharm.getMaxItemIndex() >= ItemsDataBase.getInstance().getItemList().indexOf(mCurrentItem) || mCurrentItem == null)
-            mCharmButton.setImageResource(mCharm.getDrawableId());
-        else mCharmButton.setImageDrawable(null);
+
         mScrollButton.setImageResource(mScroll.getDrawableId());
-        if (mCurrentItem != null) {
-            mSuccessChance = (int) (mCurrentItem.getSuccessChance() * mCharm.getMultiplyIndex());
+        List<Items> itemList= ItemsDataBase.getInstance().getItemList();
+        if (mCurrentItem != null && itemList.indexOf(mCurrentItem) != itemList.size() - 1) {
+            mSuccessChance = (int) (mCurrentItem.getSuccessChance() * (mCharm != null ? mCharm.getMultiplyIndex() : 1));
             mSuccessChance = mSuccessChance > 100 ? 100 : mSuccessChance;
             mTextChanceView.setText(mSuccessChance + "%");
             mOkButton.setEnabled(true);

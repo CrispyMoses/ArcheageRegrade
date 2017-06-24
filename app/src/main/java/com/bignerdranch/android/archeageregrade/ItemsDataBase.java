@@ -38,11 +38,12 @@ public class ItemsDataBase {
         mScrollList.add(new Scroll(R.string.twin_scroll, true, R.drawable.twin_scroll));
 
         mCharmList = new ArrayList<>();
+        mCharmList.add(new Charm(R.string.none_charm, 0, 1));
         mCharmList.add(new Charm(R.string.main_charm, R.drawable.main_charm, 1.75f, 3));
         mCharmList.add(new Charm(R.string.upgraded_main_charm, R.drawable.upgraded_main_charm, 1.75f, 4));
         mCharmList.add(new Charm(R.string.weak_charm, R.drawable.weak_charm, 1.5f, 5));
         mCharmList.add(new Charm(R.string.strong_charm, R.drawable.strong_charm, 2, 5));
-        mCharmList.add(new Charm(R.string.akhium_talisman, R.drawable.akhium_talisman, 1, 6));
+        mCharmList.add(new Charm(R.string.akhium_talisman, R.drawable.akhium_talisman, 1, 6, 6, true));
         mCharmList.add(new Charm(R.string.weak_universal_charm, R.drawable.weak_universal_charm, 1.5f));
         mCharmList.add(new Charm(R.string.strong_universal_charm, R.drawable.strong_universal_charm, 2));
         mCharmList.add(new Charm(R.string.twinkle_charm, R.drawable.twinkle_charm, 2.5f));
