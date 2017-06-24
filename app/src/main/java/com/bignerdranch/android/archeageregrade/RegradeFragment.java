@@ -46,17 +46,27 @@ public class RegradeFragment extends Fragment {
     public static final int ITEM_DIALOG_LIST_CODE = 1;
     public static final int SCROLL_DIALOG_LIST_CODE = 2;
     public static final int CHARM_DIALOG_LIST_CODE = 3;
+    public static final String CHARM_LIST_INDEX = "CharmListIndex";
+    public static final String SCROLL_LIST_INDEX = "ScrollListIndex";
+    public static final String ITEM_LIST_INDEX = "ItemListIndex";
     private static final int REQUEST_ITEM = 0;
 
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_regrade, container, false);
-
-        ItemsDataBase database = ItemsDataBase.getInstance();
-        mCurrentItem = (Item) database.getItemList().get(6);
-        mCharm = (Charm) database.getCharmList().get(5);
-        mScroll = (Scroll) database.getScrollList().get(1);
+        if (savedInstanceState == null) {
+            ItemsDataBase database = ItemsDataBase.getInstance();
+            mCurrentItem = (Item) database.getItemList().get(6);
+            mCharm = (Charm) database.getCharmList().get(5);
+            mScroll = (Scroll) database.getScrollList().get(1);
+        }
+        else {
+            ItemsDataBase database = ItemsDataBase.getInstance();
+            mCurrentItem = (Item) database.getItemList().get(savedInstanceState.getInt(ITEM_LIST_INDEX));
+            mCharm = (Charm) database.getCharmList().get(savedInstanceState.getInt(CHARM_LIST_INDEX));
+            mScroll = (Scroll) database.getScrollList().get(savedInstanceState.getInt(SCROLL_LIST_INDEX));
+        }
 
         mItemButton = (ImageButton) v.findViewById(R.id.item_button);
         mCharmButton = (ImageButton) v.findViewById(R.id.charm_button);
@@ -203,5 +213,14 @@ public class RegradeFragment extends Fragment {
             else if (code == CHARM_DIALOG_LIST_CODE) mCharm = (Charm) ItemsDataBase.getInstance().getCharmList().get(position);
             updateUI();
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        ItemsDataBase dataBase = ItemsDataBase.getInstance();
+        outState.putInt(ITEM_LIST_INDEX,dataBase.getItemList().indexOf(mCurrentItem));
+        outState.putInt(SCROLL_LIST_INDEX,dataBase.getScrollList().indexOf(mScroll));
+        outState.putInt(CHARM_LIST_INDEX,dataBase.getCharmList().indexOf(mCharm));
     }
 }
